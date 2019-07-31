@@ -47,13 +47,14 @@ class BooksApp extends Component {
       this.setState({ error: true });
     });
     if (shelf === 'none') {
-      this.setState(prevState => {
-        prevState.moveBooks.filter(b => b.id !== book.id);
-      });
+      this.setState(prevState => ({
+        myBooks: prevState.myBooks.filter(b => b.id !== book.id),
+      }));
     } else {
-      this.setState(prevState => {
-        prevState.moveBooks.filter(b => b.id !== book.id).concat(book);
-      });
+      book.shelf = shelf;
+      this.setState(prevState => ({
+        myBooks: prevState.myBooks.filter(b => b.id !== book.id).concat(book),
+      }));
     }
   };
 
